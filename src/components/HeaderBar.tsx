@@ -1,8 +1,12 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC} from 'react';
 import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import {styled} from "@mui/material/styles";
 
+
+interface HeaderBarProps {
+    handleDrawer: () => void
+}
 
 const Header = styled(AppBar)`
   z-index: 1201;
@@ -12,7 +16,7 @@ const Header = styled(AppBar)`
   box-shadow: inset 0 -1px 0 0 #dadce0;
 `;
 
-const HeaderBar: FC<any> = ({handleDrawer}): ReactElement => {
+const HeaderBar: FC<HeaderBarProps> = ({handleDrawer}) => {
     const logo = 'https://cdn-icons-png.flaticon.com/512/3320/3320975.png'
     
     return (

@@ -1,8 +1,9 @@
-import React, {ReactElement, useContext, useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import {Box, TextField, ClickAwayListener} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {DataContext} from "../../context/DataProvider";
 import {v4 as uuid} from 'uuid';
+import {INote} from "../../types";
 
 const Container = styled(Box)`
   display: flex;
@@ -15,13 +16,7 @@ const Container = styled(Box)`
   border-color: #e0e0e0;
 `
 
-type NoteType = {
-    id: string
-    title: string
-    text: string
-}
-
-const note: NoteType = {
+const note: INote = {
     id: '',
     title: '',
     text: ''
@@ -29,7 +24,7 @@ const note: NoteType = {
 
 const Form = () => {
 
-    const {notes, setNotes} = useContext(DataContext)
+    const {setNotes} = useContext(DataContext)
 
     const [showTextField, setShowTextField] = useState(false)
     const [addNote, setAddNote] = useState({...note, id: uuid()})
@@ -49,7 +44,6 @@ const Form = () => {
         if (addNote.title || addNote.text) {
             setNotes((prevArr: object[]) => [addNote, ...prevArr])
         }
-        console.log(notes)
     }
 
     const onTextChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {

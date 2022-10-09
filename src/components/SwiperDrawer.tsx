@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {styled, Theme, CSSObject} from '@mui/material/styles';
-import {Box, Divider, Drawer as MuiDrawer} from '@mui/material';
+import {Box, Drawer as MuiDrawer} from '@mui/material';
 import HeaderBar from "./HeaderBar";
 import NavList from "./NavList";
 
@@ -50,7 +50,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 );
 
 const SwiperDrawer = () => {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState<boolean>(true);
 
     const handleDrawer = () => {
         setOpen(prevState => !prevState);
@@ -64,7 +64,6 @@ const SwiperDrawer = () => {
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader></DrawerHeader>
                 <NavList open={open}/>
-                <Divider/>
             </Drawer>
         </Box>
     );

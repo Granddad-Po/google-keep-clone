@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from "@mui/material";
 import SwiperDrawer from "./SwiperDrawer";
-import Notes from "./notes/Notes";
+import Notes from "./notes/NotesList";
 
 const Home = () => {
     return (

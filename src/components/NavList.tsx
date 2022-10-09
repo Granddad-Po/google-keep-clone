@@ -1,11 +1,16 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC} from 'react';
 import {ListItem, ListItemButton, ListItemText, List} from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import {LightbulbOutlined as LightIcon} from '@mui/icons-material';
 import {ArchiveOutlined as ArchiveIcon} from '@mui/icons-material';
 import {DeleteOutlineOutlined as TrashIcon} from '@mui/icons-material';
 
-const NavList: FC<any> = ({open}): ReactElement => {
+
+interface IBoolean {
+    open: boolean
+}
+
+const NavList: FC<IBoolean> = ({open}) => {
     const navList = [
         {id: 1, name: 'Notes', icon: <LightIcon/>},
         {id: 2, name: 'Archive', icon: <ArchiveIcon/>},

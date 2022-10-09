@@ -1,28 +1,64 @@
-import React from 'react';
+import React, {FC, useContext} from 'react';
 import {Card, CardActions, CardContent, Typography} from "@mui/material";
+import { ArchiveOutlined, DeleteOutlineOutlined } from '@mui/icons-material';
+import {INote} from "../../types";
+import {styled} from "@mui/material/styles";
+import {DataContext} from "../../context/DataProvider";
 
-type NoteProps = {
-    id: string
-    title: string
-    text: string
+
+interface NoteProps {
+    note: INote
 }
 
-const Note: React.FC<NoteProps> = ({id, title, text}) => {
+const StyledCard = styled(Card)`
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 240px;
+  margin: 8px;
+  box-shadow: none;
+`
+
+const Note: FC<NoteProps> = ({note}) => {
+    
+    const {notes, setNotes, setArchiveNotes, setDeletedNotes} = useContext(DataContext)
+    
+    const archiveNote = (note: INote) => {
+        const updatedNotes = notes.filter(data => data.id !== note.id)
+        setNotes(updatedNotes)
+        
+        setArchiveNotes(note)
+    }
+    
+    const deleteNote = (note: INote) => {
+        const updatedNotes = notes.filter(data => data.id !== note.id)
+        setNotes(updatedNotes)
+        
+        setDeletedNotes(note)
+    }
+    
     return (
-        <Card>
+        <StyledCard>
             <CardContent>
                 <Typography>
-                    {title}
+                    {note.title}
                 </Typography>
                 <Typography>
-                    {text}
+                    {note.text}
                 </Typography>
             </CardContent>
             <CardActions>
-                
+                <ArchiveOutlined
+                    fontSize="small"
+                    style={{ marginLeft: 'auto' }}
+                    onClick={() => archiveNote(note)}
+                />
+                <DeleteOutlineOutlined
+                    fontSize="small"
+                    onClick={() => deleteNote(note)}
+                />
             </CardActions>
             
-        </Card>
+        </StyledCard>
     );
 };
 

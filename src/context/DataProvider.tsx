@@ -1,21 +1,23 @@
 import React, {createContext, PropsWithChildren, useState} from 'react';
+import {INote} from "../types";
+
 
 export const DataContext = createContext({} as ValueType)
 
-interface ValueType {
-    notes: Array<object>
+export interface ValueType {
+    notes: INote[]
     setNotes: Function
-    archiveNotes: Array<object>
+    archiveNotes: INote[]
     setArchiveNotes: Function
-    deletedNotes: Array<object>
+    deletedNotes: INote[]
     setDeletedNotes: Function
 }
 
 const DataProvider: React.FC<PropsWithChildren> = ({children}) => {
     
-    const [notes, setNotes] = useState<Array<object>>([])
-    const [archiveNotes, setArchiveNotes] = useState<Array<object>>([])
-    const [deletedNotes, setDeletedNotes] = useState<Array<object>>([])
+    const [notes, setNotes] = useState<INote[]>([])
+    const [archiveNotes, setArchiveNotes] = useState<INote[]>([])
+    const [deletedNotes, setDeletedNotes] = useState<INote[]>([])
     
     return (
         <DataContext.Provider value={{
