@@ -50,7 +50,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 );
 
 const SwiperDrawer = () => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     const handleDrawer = () => {
         setOpen(prevState => !prevState);
@@ -59,7 +59,6 @@ const SwiperDrawer = () => {
     return (
         <Box sx={{display: 'flex'}}>
             <HeaderBar 
-                open={open} 
                 handleDrawer={handleDrawer}
             />
             <Drawer variant="permanent" open={open}>

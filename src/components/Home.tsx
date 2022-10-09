@@ -1,11 +1,14 @@
 import React from 'react';
+import {Box} from "@mui/material";
 import SwiperDrawer from "./SwiperDrawer";
+import Notes from "./notes/Notes";
 
 const Home = () => {
     return (
-        <div>
+        <Box style={{display: 'flex', width: '100%'}}> 
             <SwiperDrawer/>
-        </div>
+            <Notes/>
+        </Box>
     );
 };
 
