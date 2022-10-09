@@ -3,7 +3,7 @@ import {Box, TextField, ClickAwayListener} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {DataContext} from "../../context/DataProvider";
 import {v4 as uuid} from 'uuid';
-import {INote} from "../../types";
+import {INote} from "../../types/types";
 
 const Container = styled(Box)`
   display: flex;
@@ -42,7 +42,7 @@ const Form = () => {
         setAddNote({...note, id: uuid()});
         
         if (addNote.title || addNote.text) {
-            setNotes((prevArr: object[]) => [addNote, ...prevArr])
+            setNotes((prevArr: INote[]) => [addNote, ...prevArr])
         }
     }
 

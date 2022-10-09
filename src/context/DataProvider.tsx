@@ -1,5 +1,5 @@
 import React, {createContext, PropsWithChildren, useState} from 'react';
-import {INote} from "../types";
+import {INote} from "../types/types";
 
 
 export const DataContext = createContext({} as ValueType)
