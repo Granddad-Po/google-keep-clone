@@ -5,6 +5,8 @@ import Form from "./Form";
 import Note from "./Note";
 import {DataContext, ValueType} from "../../context/DataProvider";
 import Empty from "./Empty";
+import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
+import {reorder} from "../../utils/common-utils";
 
 
 const DrawerHeader = styled('div')(({theme}) => ({
@@ -14,7 +16,15 @@ const DrawerHeader = styled('div')(({theme}) => ({
 
 const NotesList = () => {
 
-    const {notes} = useContext<ValueType>(DataContext)
+    const {notes, setNotes} = useContext<ValueType>(DataContext)
+
+    const onDragEnd = (result: any) => {
+        if (!result.destination)
+            return;
+
+        const items = reorder(notes, result.source.index, result.destination.index);
+        setNotes(items);
+    }
 
     return (
         <Box sx={{display: 'flex', width: '100%'}}>
@@ -23,22 +33,38 @@ const NotesList = () => {
                 <Form/>
                 {
                     notes.length > 0 ?
-                        <Grid container style={{marginTop: 16}}>
-                            {
-                                notes.map((note) => (
-                                    <Grid key={note.id} item>
-                                        <Note note={note}/>
+                        <DragDropContext onDragEnd={onDragEnd}>
+                            <Droppable droppableId="droppable">
+                                {(provided, snapshot) => (
+                                    <Grid  container style={{display: 'flex', justifyContent: 'space-between', marginTop: 16}}
+                                          {...provided.droppableProps}
+                                          ref={provided.innerRef}
+                                    >
+                                        {
+                                            notes.map((note, index) => (
+                                                <Draggable key={note.id} draggableId={note.id} index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <Grid key={note.id} item
+                                                              ref={provided.innerRef}
+                                                              {...provided.draggableProps}
+                                                              {...provided.dragHandleProps}
+                                                        >
+                                                            <Note note={note}/>
+                                                        </Grid>
+                                                    )}
+                                                </Draggable>
+                                            ))
+                                        }
                                     </Grid>
-                                ))
-                            }
-                        </Grid>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                         :
                         <Empty/>
                 }
-
             </Box>
         </Box>
-    );
-};
+    )
+}
 
 export default NotesList;
