@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react';
-import {Card, CardActions, CardContent, Typography} from "@mui/material";
+import {Card, CardActions, CardContent, IconButton, Tooltip, Typography} from "@mui/material";
 import {RestoreFromTrash, DeleteForever} from '@mui/icons-material';
 import {INote} from "../../types/types";
 import {styled} from "@mui/material/styles";
@@ -20,13 +20,13 @@ const StyledCard = styled(Card)`
 
 const DeleteNote: FC<NoteProps> = ({note}) => {
 
-    const {deletedNotes, setArchiveNotes, setDeletedNotes} = useContext(DataContext)
+    const {deletedNotes, setNotes, setDeletedNotes} = useContext(DataContext)
 
-    const recoverNote = (note: INote) => {
+    const restoreNote = (note: INote) => {
         const updatedNotes = deletedNotes.filter(data => data.id !== note.id)
         setDeletedNotes(updatedNotes)
 
-        setArchiveNotes((prevArr: INote[]) => [note, ...prevArr])
+        setNotes((prevArr: INote[]) => [note, ...prevArr])
     }
 
     const deleteNote = (note: INote) => {
@@ -45,17 +45,26 @@ const DeleteNote: FC<NoteProps> = ({note}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <RestoreFromTrash
-                    fontSize="small"
-                    style={{marginLeft: 'auto'}}
-                    onClick={() => recoverNote(note)}
-                />
-                <DeleteForever
-                    fontSize="small"
-                    onClick={() => deleteNote(note)}
-                />
+                <Tooltip title={'Restore'}>
+                    <IconButton
+                        style={{marginLeft: 'auto'}}
+                        onClick={() => restoreNote(note)}
+                    >
+                        <RestoreFromTrash
+                            fontSize="small"
+                        />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={'Delete forever'}>
+                    <IconButton
+                        onClick={() => deleteNote(note)}
+                    >
+                        <DeleteForever
+                            fontSize="small"
+                        />
+                    </IconButton>
+                </Tooltip>
             </CardActions>
-
         </StyledCard>
     );
 };

@@ -3,7 +3,8 @@ import {Box, Grid} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import ArchiveNote from "./ArchiveNote";
 import {DataContext, ValueType} from "../../context/DataProvider";
-import Empty from "../notes/Empty";
+import ArchiveEmpty from "./ArchiveEmpty";
+import { useLocation } from 'react-router-dom'
 
 
 const DrawerHeader = styled('div')(({theme}) => ({
@@ -14,6 +15,9 @@ const DrawerHeader = styled('div')(({theme}) => ({
 const ArchiveList = () => {
 
     const {archiveNotes} = useContext<ValueType>(DataContext)
+
+    const location = useLocation();
+    console.log(location.pathname);
 
     return (
         <Box sx={{display: 'flex', width: '100%'}}>
@@ -31,7 +35,7 @@ const ArchiveList = () => {
                             }
                         </Grid>
                         :
-                        <Empty/>
+                        <ArchiveEmpty/>
                 }
             </Box>
         </Box>

@@ -1,6 +1,6 @@
 import React, {FC, useContext} from 'react';
-import {Card, CardActions, CardContent, Typography} from "@mui/material";
-import {Unarchive, DeleteOutlineOutlined} from '@mui/icons-material';
+import {Card, CardActions, CardContent, IconButton, Tooltip, Typography} from "@mui/material";
+import {UnarchiveOutlined, DeleteOutlineOutlined} from '@mui/icons-material';
 import {INote} from "../../types/types";
 import {styled} from "@mui/material/styles";
 import {DataContext} from "../../context/DataProvider";
@@ -47,15 +47,25 @@ const ArchiveNote: FC<NoteProps> = ({note}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Unarchive
-                    fontSize="small"
-                    style={{marginLeft: 'auto'}}
-                    onClick={() => backNote(note)}
-                />
-                <DeleteOutlineOutlined
-                    fontSize="small"
-                    onClick={() => deleteNote(note)}
-                />
+                <Tooltip title={'Return from archive'}>
+                    <IconButton
+                        style={{marginLeft: 'auto'}}
+                        onClick={() => backNote(note)}
+                    >
+                        <UnarchiveOutlined
+                            fontSize="small"
+                        />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={'Delete'}>
+                    <IconButton
+                        onClick={() => deleteNote(note)}
+                    >
+                        <DeleteOutlineOutlined
+                            fontSize="small"
+                        />
+                    </IconButton>
+                </Tooltip>
             </CardActions>
         </StyledCard>
     );

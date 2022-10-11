@@ -1,6 +1,6 @@
 import React, {FC, useContext} from 'react';
-import {Card, CardActions, CardContent, Typography} from "@mui/material";
-import { ArchiveOutlined, DeleteOutlineOutlined } from '@mui/icons-material';
+import {Card, CardActions, CardContent, IconButton, Tooltip, Typography} from "@mui/material";
+import {ArchiveOutlined, DeleteOutlineOutlined} from '@mui/icons-material';
 import {INote} from "../../types/types";
 import {styled} from "@mui/material/styles";
 import {DataContext} from "../../context/DataProvider";
@@ -19,23 +19,23 @@ const StyledCard = styled(Card)`
 `
 
 const Note: FC<NoteProps> = ({note}) => {
-    
+
     const {notes, setNotes, setArchiveNotes, setDeletedNotes} = useContext(DataContext)
-    
+
     const archiveNote = (note: INote) => {
         const updatedNotes = notes.filter(data => data.id !== note.id)
         setNotes(updatedNotes)
-        
-        setArchiveNotes((prevArr: INote[])  => [note, ...prevArr])
+
+        setArchiveNotes((prevArr: INote[]) => [note, ...prevArr])
     }
-    
+
     const deleteNote = (note: INote) => {
         const updatedNotes = notes.filter(data => data.id !== note.id)
         setNotes(updatedNotes)
-        
+
         setDeletedNotes((prevArr: INote[]) => [note, ...prevArr])
     }
-    
+
     return (
         <StyledCard>
             <CardContent>
@@ -47,17 +47,26 @@ const Note: FC<NoteProps> = ({note}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <ArchiveOutlined
-                    fontSize="small"
-                    style={{ marginLeft: 'auto' }}
-                    onClick={() => archiveNote(note)}
-                />
-                <DeleteOutlineOutlined
-                    fontSize="small"
-                    onClick={() => deleteNote(note)}
-                />
+                <Tooltip title={'Archive'}>
+                    <IconButton
+                        style={{marginLeft: 'auto'}}
+                        onClick={() => archiveNote(note)}
+                    >
+                        <ArchiveOutlined
+                            fontSize="small"
+                        />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={'Delete'}>
+                    <IconButton
+                        onClick={() => deleteNote(note)}
+                    >
+                        <DeleteOutlineOutlined
+                            fontSize="small"
+                        />
+                    </IconButton>
+                </Tooltip>
             </CardActions>
-            
         </StyledCard>
     );
 };
