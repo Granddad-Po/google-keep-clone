@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react';
-import {Card, CardActions, CardContent, IconButton, Tooltip, Typography} from "@mui/material";
+import {Box, Button, Card, CardActions, CardContent, IconButton, Modal, Tooltip, Typography} from "@mui/material";
 import {RestoreFromTrash, DeleteForever} from '@mui/icons-material';
 import {INote} from "../../types/types";
 import {styled} from "@mui/material/styles";
@@ -18,9 +18,24 @@ const StyledCard = styled(Card)`
   box-shadow: none;
 `
 
+const styleModal = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    borderRadius: '8px',
+    boxShadow: 24,
+    p: 4,
+};
+
 const DeleteNote: FC<NoteProps> = ({note}) => {
 
     const {deletedNotes, setNotes, setDeletedNotes} = useContext(DataContext)
+    const [onModal, setOnModal] = React.useState(false);
+    const handleOpen = () => setOnModal(true);
+    const handleClose = () => setOnModal(false);
 
     const restoreNote = (note: INote) => {
         const updatedNotes = deletedNotes.filter(data => data.id !== note.id)
@@ -57,13 +72,29 @@ const DeleteNote: FC<NoteProps> = ({note}) => {
                 </Tooltip>
                 <Tooltip title={'Delete forever'}>
                     <IconButton
-                        onClick={() => deleteNote(note)}
+                        onClick={handleOpen}
                     >
                         <DeleteForever
                             fontSize="small"
                         />
                     </IconButton>
                 </Tooltip>
+                <Modal
+                    open={onModal}
+                    onClose={handleClose}
+                    aria-labelledby="modal-title"
+                    aria-describedby="modal-description"
+                >
+                    <Box sx={styleModal}>
+                        <Typography id="modal-title" variant="h6" component="h2">
+                            Delete note forever?
+                        </Typography>
+                        <Box id="modal-description" sx={{ display: 'flex', justifyContent: 'right', mt: 2}}>
+                            <Button onClick={handleClose} sx={{ml: 'auto', mr: '10px'}} variant="text">Cancel</Button>
+                            <Button onClick={() => deleteNote(note)} variant="text">Delete</Button>
+                        </Box>
+                    </Box>
+                </Modal>
             </CardActions>
         </StyledCard>
     );
