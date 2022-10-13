@@ -34,9 +34,17 @@ const NotesList = () => {
                 {
                     notes.length > 0 ?
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <Droppable droppableId="droppable">
+                            <Droppable droppableId="droppable" direction="horizontal">
                                 {(provided, snapshot) => (
-                                    <Grid  container style={{display: 'flex', justifyContent: 'space-between', marginTop: 16}}
+                                    <Grid container style={{
+                                        display: 'grid',
+                                        justifyContent: 'center',
+                                        gridTemplateColumns: 'repeat(auto-fill, 240px)',
+                                        gridGap: '10px',
+                                        justifyItems: 'stretch',
+                                        alignItems: 'stretch',
+                                        margin: '16px auto 0',
+                                    }}
                                           {...provided.droppableProps}
                                           ref={provided.innerRef}
                                     >
@@ -44,10 +52,14 @@ const NotesList = () => {
                                             notes.map((note, index) => (
                                                 <Draggable key={note.id} draggableId={note.id} index={index}>
                                                     {(provided, snapshot) => (
-                                                        <Grid key={note.id} item
-                                                              ref={provided.innerRef}
-                                                              {...provided.draggableProps}
-                                                              {...provided.dragHandleProps}
+                                                        <Grid
+                                                            item
+                                                            // width={'240px'}
+                                                            // margin={'8px'}
+                                                            key={note.id}
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
                                                         >
                                                             <Note note={note}/>
                                                         </Grid>
@@ -55,6 +67,7 @@ const NotesList = () => {
                                                 </Draggable>
                                             ))
                                         }
+                                        {provided.placeholder}
                                     </Grid>
                                 )}
                             </Droppable>
