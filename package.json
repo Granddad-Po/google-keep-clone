@@ -2,7 +2,7 @@
   "name": "google-keep-clone",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://granddad-po.github.io/",
+  "homepage": "https://granddad-po.github.io/google-keep-clone",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
