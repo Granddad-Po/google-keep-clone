@@ -43,7 +43,7 @@ const NotesList = () => {
                                         gridGap: '10px',
                                         justifyItems: 'stretch',
                                         alignItems: 'stretch',
-                                        margin: '16px auto 0',
+                                        margin: '20px auto 0',
                                     }}
                                           {...provided.droppableProps}
                                           ref={provided.innerRef}
