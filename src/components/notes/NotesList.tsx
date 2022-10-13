@@ -54,8 +54,6 @@ const NotesList = () => {
                                                     {(provided, snapshot) => (
                                                         <Grid
                                                             item
-                                                            // width={'240px'}
-                                                            // margin={'8px'}
                                                             key={note.id}
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
