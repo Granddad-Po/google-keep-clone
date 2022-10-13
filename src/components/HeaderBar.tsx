@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import {styled} from "@mui/material/styles";
-import {useHref, useParams} from "react-router-dom";
 
 
 interface HeaderBarProps {

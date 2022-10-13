@@ -2,7 +2,6 @@
   "name": "google-keep-clone",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -28,17 +27,11 @@
     "typescript": "^4.8.4",
     "uuid": "^9.0.0"
   },
-  "devDependencies": {
-    "gh-pages": "^4.0.0"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "install gh-pages": "npm install gh-pages --save-dev",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
