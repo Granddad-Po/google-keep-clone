@@ -1,5 +1,5 @@
 import React, {useContext, useRef, useState} from 'react';
-import {Box, TextField, ClickAwayListener} from "@mui/material";
+import {Box, TextField, ClickAwayListener, Button} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {DataContext} from "../../context/DataProvider";
 import {v4 as uuid} from 'uuid';
@@ -40,7 +40,7 @@ const Form = () => {
         setShowTextField(false)
         containerRef.current.style.minHeight = '30px'
         setAddNote({...note, id: uuid()});
-        
+
         if (addNote.title || addNote.text) {
             setNotes((prevArr: INote[]) => [addNote, ...prevArr])
         }
@@ -75,6 +75,21 @@ const Form = () => {
                     name='text'
                     value={addNote.text}
                 />
+                {
+                    showTextField && <Button
+                        variant="text"
+                        onClick={handleClickAway}
+                        sx={{color: "inherit",
+                            width: '30px',
+                            marginLeft: "auto",
+                            "&:hover": {
+                                backgroundColor: "#F5F5F5"
+                            }
+                        }}
+                    >
+                        Done
+                    </Button>
+                }
             </Container>
         </ClickAwayListener>
     );
