@@ -11,6 +11,8 @@ export interface ValueType {
     setArchiveNotes: Function
     deletedNotes: INote[]
     setDeletedNotes: Function
+    searchValue: string
+    setSearchValue: Function
 }
 
 const DataProvider: React.FC<PropsWithChildren> = ({children}) => {
@@ -18,6 +20,7 @@ const DataProvider: React.FC<PropsWithChildren> = ({children}) => {
     const [notes, setNotes] = useState<INote[]>([])
     const [archiveNotes, setArchiveNotes] = useState<INote[]>([])
     const [deletedNotes, setDeletedNotes] = useState<INote[]>([])
+    const [searchValue, setSearchValue] = useState('')
     
     return (
         <DataContext.Provider value={{
@@ -27,6 +30,8 @@ const DataProvider: React.FC<PropsWithChildren> = ({children}) => {
             setArchiveNotes,
             deletedNotes,
             setDeletedNotes,
+            searchValue,
+            setSearchValue,
         }}>
             {children}
         </DataContext.Provider>
