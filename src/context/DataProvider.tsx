@@ -13,6 +13,8 @@ export interface ValueType {
     setDeletedNotes: Function
     searchValue: string
     setSearchValue: Function
+    filterMode: boolean
+    setFilterMode: Function
 }
 
 const DataProvider: React.FC<PropsWithChildren> = ({children}) => {
@@ -21,6 +23,7 @@ const DataProvider: React.FC<PropsWithChildren> = ({children}) => {
     const [archiveNotes, setArchiveNotes] = useState<INote[]>([])
     const [deletedNotes, setDeletedNotes] = useState<INote[]>([])
     const [searchValue, setSearchValue] = useState('')
+    const [filterMode, setFilterMode] = useState(false)
     
     return (
         <DataContext.Provider value={{
@@ -32,6 +35,8 @@ const DataProvider: React.FC<PropsWithChildren> = ({children}) => {
             setDeletedNotes,
             searchValue,
             setSearchValue,
+            filterMode,
+            setFilterMode,
         }}>
             {children}
         </DataContext.Provider>

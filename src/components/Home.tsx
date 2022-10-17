@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from "@mui/material";
 import SwiperDrawer from "./SwiperDrawer";
-import Notes from "./notes/NotesList";
+import Notes from "./NotesWindow";
 import Archive from "./archive/ArchiveList";
 import Trash from "./trash/DeleteList";
 import {Routes, Route} from "react-router-dom";

@@ -6,7 +6,7 @@ import Note from "./Note";
 import {DataContext, ValueType} from "../../context/DataProvider";
 import Empty from "./Empty";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
-import {filteringNotes, reorder} from "../../utils/common-utils";
+import {reorder} from "../../utils/common-utils";
 
 
 const DrawerHeader = styled('div')(({theme}) => ({
@@ -14,9 +14,9 @@ const DrawerHeader = styled('div')(({theme}) => ({
 }));
 
 
-const NotesList = () => {
+const Notes = () => {
 
-    const {notes, setNotes, searchValue} = useContext<ValueType>(DataContext)
+    const {notes, setNotes} = useContext<ValueType>(DataContext)
 
     const onDragEnd = (result: any) => {
         if (!result.destination)
@@ -25,8 +25,6 @@ const NotesList = () => {
         const items = reorder(notes, result.source.index, result.destination.index);
         setNotes(items);
     }
-    
-    const filteredNotes = filteringNotes(notes, searchValue)
 
     return (
         <Box sx={{display: 'flex', width: '100%'}}>
@@ -80,4 +78,4 @@ const NotesList = () => {
     )
 }
 
-export default NotesList;
+export default Notes;
