@@ -9,8 +9,8 @@ export const reorder = (list: INote[], startIndex: number, endIndex: number) => 
     return result;
 };
 
-export const filteringNotes = (notes: INote[], searchValue: string) => {
-    return notes.filter(note => (
+export const filtration = (arr: INote[], searchValue: string) => {
+    return arr.filter(note => (
         (note.title.toLowerCase() || note.text.toLowerCase()).includes(searchValue.toLowerCase())
     ))
 }
